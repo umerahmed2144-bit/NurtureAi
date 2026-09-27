@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+@import '@fontsource/fredoka/400.css';
+@import '@fontsource/fredoka/500.css';
+@import '@fontsource/fredoka/600.css';
+@import '@fontsource/fredoka/700.css';
+@import '@fontsource/nunito/400.css';
+@import '@fontsource/nunito/600.css';
+@import '@fontsource/nunito/700.css';
+@import '@fontsource/nunito/800.css';
+
+/* `static` forces every token to be emitted as a CSS variable even when it is
+   only referenced at runtime via inline styles (var(--color-mango) etc.),
+   which Tailwind v4 would otherwise tree-shake away. */
+@theme static {
+  /* Typography, rounded, friendly (matches reference) */
+  --font-display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --font-sans: 'Nunito', system-ui, sans-serif;
+
+  /* Core palette */
+  --color-ink: #1a1d26;
+  --color-ink-soft: #4a5061;
+  --color-muted: #8b93a3;
+  --color-line: #eceef3;
+
+  --color-canvas: #f4f5f8;
+  --color-surface: #ffffff;
+
+  /* Brand, cornflower blue */
+  --color-brand: #5b8def;
+  --color-brand-strong: #3f6fd6;
+  --color-brand-soft: #e8f0ff;
+  --color-periwinkle: #7b93f5;
+
+  /* Playful accents (category tiles / illustrations) */
+  --color-mango: #ff9a3d;
+  --color-mango-soft: #fff0e0;
+  --color-grass: #35c37a;
+  --color-grass-soft: #e2f7ec;
+  --color-grape: #9b6bff;
+  --color-grape-soft: #f0e9ff;
+  --color-coral: #ff6b6b;
+  --color-coral-soft: #ffe8e8;
+  --color-sky: #35c3e0;
+  --color-sky-soft: #e0f6fb;
+  --color-sun: #ffc93c;
+  --color-sun-soft: #fff6db;
+
+  /* Status */
+  --color-status-strong: #35c37a;
+  --color-status-developing: #5b8def;
+  --color-status-monitor: #ff9a3d;
+  --color-status-attention: #ff6b6b;
+
+  /* Radii */
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
+
+  /* Shadows, soft, diffuse */
+  --shadow-soft: 0 10px 30px -12px rgba(31, 45, 84, 0.18);
+  --shadow-card: 0 6px 22px -10px rgba(31, 45, 84, 0.16);
+  --shadow-pop: 0 20px 50px -18px rgba(31, 45, 84, 0.35);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  /* smooth cross-fade when switching Playful <-> Calm */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* Utility layer helpers */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Reduced-motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
