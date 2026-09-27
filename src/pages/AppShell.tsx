@@ -41,6 +41,15 @@ export function AppShell() {
           >
             ← back to site
           </Link>
+          <Link
+            to="/feedback"
+            className={`hidden rounded-full px-3 py-2 text-xs font-bold sm:inline-flex ${
+              story ? 'bg-white/20 text-white' : 'bg-white text-[var(--color-ink-soft)] shadow-[var(--shadow-card)]'
+            }`}
+            title="Give feedback"
+          >
+            📝 Feedback
+          </Link>
         </div>
 
         <div className="flex items-center gap-2">

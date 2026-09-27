@@ -58,6 +58,7 @@ function Nav() {
           <a href="#how" className="transition-colors hover:text-[var(--color-brand)]">How it works</a>
           <a href="#why" className="transition-colors hover:text-[var(--color-brand)]">Why AI</a>
           <a href="#pricing" className="transition-colors hover:text-[var(--color-brand)]">Pricing</a>
+          <Link to="/feedback" className="transition-colors hover:text-[var(--color-brand)]">Feedback</Link>
         </div>
         <Link to="/app">
           <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} className="inline-block">

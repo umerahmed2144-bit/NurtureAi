@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Landing } from './pages/Landing'
+import { Feedback } from './pages/Feedback'
 import { AppShell } from './pages/AppShell'
 import { Home } from './pages/app/Home'
 import { Dashboard } from './pages/app/Dashboard'
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/feedback" element={<Feedback />} />
       <Route path="/app" element={<AppShell />}>
         <Route index element={<Home />} />
         <Route path="dashboard" element={<Dashboard />} />
