@@ -134,3 +134,7 @@ h5 {
 [dir='rtl'] li {
   line-height: 1.7;
 }
+/* Brand wordmark keeps its typeface in every language. */
+[dir='rtl'] .keep-font {
+  font-family: var(--font-display);
+}

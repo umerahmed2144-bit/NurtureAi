@@ -26,6 +26,9 @@ export function Reveal({
   className?: string
   style?: React.CSSProperties
 }) {
+  // Urdu/Arabic letters join to their neighbours, so never split them apart.
+  const joined = /[\u0600-\u06FF]/.test(text)
+  if (joined) type = 'word'
   const units = type === 'letter' ? [...text] : text.split(' ')
   const container: Variants = {
     hidden: {},
@@ -47,6 +50,7 @@ export function Reveal({
     ...(trigger === 'inView'
       ? { whileInView: 'show' as const, viewport: { once: true, margin: '-70px' } }
       : { animate: 'show' as const }),
+    key: text,
     'aria-label': text,
     className,
     style: {

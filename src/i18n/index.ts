@@ -1,5 +1,8 @@
 import type { Lang } from '../data/strings'
-import { DICT } from './dict'
+import { DICT as APP_DICT } from './dict'
+import { DICT_LANDING } from './dict-landing'
+
+const DICT: Record<string, [string, string]> = { ...APP_DICT, ...DICT_LANDING }
 
 export type Vars = Record<string, string | number>
 
