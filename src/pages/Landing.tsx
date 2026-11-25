@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Button } from '../components/ui'
 import { Reveal, StickyStack, BlobField, Loader, ScrollProgress, Confetti } from '../components/motion'
-import { Mascot, CartoonAnimal } from '../components/characters'
+import { Mascot } from '../components/characters'
 import { useT } from '../components/lang'
 import { LangSwitch } from '../components/LangSwitch'
 
@@ -133,68 +133,30 @@ function Hero({ heroIn }: { heroIn: boolean }) {
         </div>
 
         <Rise delay={0.2} className="relative flex justify-center">
-          <HeroPhone />
-          <FloatEmoji e="🦊" x="2%" y="6%" d={5} />
-          <FloatEmoji e="⭐" x="88%" y="0%" d={6} size="1.6rem" />
-          <FloatEmoji e="📚" x="90%" y="72%" d={5.5} size="1.8rem" />
-          <FloatEmoji e="🐨" x="-2%" y="78%" d={6.5} />
-          <motion.div
-            className="absolute -bottom-6 -left-2"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Mascot size={88} expr="wave" />
-          </motion.div>
+          <div className="relative w-full max-w-[600px]">
+            <img
+              src="/illustrations/ill-family-spot.svg"
+              alt={t('A mother and father with their daughter and son, looking at NurtureAI on the phone together')}
+              className="w-full select-none"
+              draggable={false}
+            />
+            <motion.div
+              className="relative mx-auto mt-2 max-w-[230px] rounded-2xl bg-white p-3 shadow-[var(--shadow-pop)] sm:absolute sm:-right-2 sm:top-0 sm:mt-0"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <p className="text-[10px] font-extrabold uppercase tracking-wide text-[var(--color-brand)]">{t('✨ Today’s AI pick')}</p>
+              <p className="mt-0.5 flex items-center gap-2 text-[13px] font-bold leading-tight">
+                <span className="text-xl">🦁</span>
+                {t('Animal Detective Reading Game')}
+              </p>
+              <p className="mt-0.5 text-[11px] font-semibold text-[var(--color-muted)]">{t('matched to {interest}', { interest: t('Animals') })}</p>
+            </motion.div>
+          </div>
+          <FloatEmoji e="📚" x="94%" y="70%" d={5.5} size="1.8rem" />
         </Rise>
       </Section>
     </section>
-  )
-}
-
-function HeroPhone() {
-  const { t } = useT()
-  const tiles = [
-    { e: '📊', l: 'Development', a: 'brand' },
-    { e: '🎯', l: 'Activities', a: 'mango' },
-    { e: '📄', l: 'Weekly report', a: 'grape' },
-    { e: '🩺', l: 'Find support', a: 'coral' },
-  ]
-  return (
-    <motion.div
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      className="w-[280px] rounded-[2.5rem] border-[8px] border-[#101322] bg-[var(--color-canvas)] p-4 shadow-[var(--shadow-pop)]"
-    >
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--color-grape-soft)] text-lg">🦊</span>
-          <div>
-            <p className="text-[10px] font-bold text-[var(--color-muted)]">{t('Hi Sara’s parent,')}</p>
-            <p className="text-[11px] font-extrabold text-[var(--color-grape)]">{t('⚡ 76% profile')}</p>
-          </div>
-        </div>
-        <span className="text-sm">🔔</span>
-      </div>
-      <p className="font-display text-[19px] font-semibold leading-tight">{t('Your child’s learning journey')}</p>
-      <div className="mt-3 flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[var(--shadow-card)]">
-        <span className="text-xs text-[var(--color-muted)]">🔍</span>
-        <span className="text-[11px] font-semibold text-[var(--color-muted)]">{t('Search activities…')}</span>
-      </div>
-      <div className="mt-3 grid grid-cols-2 gap-2.5">
-        {tiles.map((tile, i) => (
-          <motion.div
-            key={tile.l}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 + i * 0.1, duration: 0.4, ease: EASE }}
-            className="rounded-2xl bg-white p-3 shadow-[var(--shadow-card)]"
-          >
-            <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl text-lg" style={{ background: `var(--color-${tile.a}-soft)` }}>{tile.e}</div>
-            <p className="text-[11px] font-bold leading-tight">{t(tile.l)}</p>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
   )
 }
 
@@ -238,9 +200,9 @@ function Problem() {
 function HowItWorks() {
   const { t } = useT()
   const steps = [
-    { n: '01', e: '🐣', t: 'Build a profile', d: 'Age, grade, languages, interests and any focus areas, in under 5 minutes.', a: 'brand' },
-    { n: '02', e: '📝', t: 'Log tiny check-ins', d: 'Reading, focus, sleep, screen time, mood: a few times a week, under a minute each.', a: 'grass' },
-    { n: '03', e: '✨', t: 'Get personalized play', d: 'The AI turns patterns into interest-matched activities, a weekly report, and support when needed.', a: 'grape' },
+    { n: '01', e: '🐣', img: '/illustrations/ill-kids.svg', t: 'Build a profile', d: 'Age, grade, languages, interests and any focus areas, in under 5 minutes.', a: 'brand' },
+    { n: '02', e: '📝', img: '/illustrations/ill-checkin.svg', t: 'Log tiny check-ins', d: 'Reading, focus, sleep, screen time, mood: a few times a week, under a minute each.', a: 'grass' },
+    { n: '03', e: '✨', img: '/illustrations/ill-reading.svg', t: 'Get personalized play', d: 'The AI turns patterns into interest-matched activities, a weekly report, and support when needed.', a: 'grape' },
   ]
   return (
     <section className="relative flex min-h-screen items-center bg-white">
@@ -252,9 +214,9 @@ function HowItWorks() {
           {steps.map((s, i) => (
             <Rise key={s.n} delay={i * 0.1}>
               <motion.div whileHover={{ y: -8 }} className="h-full rounded-[1.75rem] bg-[var(--color-canvas)] p-7 shadow-[var(--shadow-card)]">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl text-3xl" style={{ background: `var(--color-${s.a}-soft)` }}>{s.e}</div>
-                  <span className="font-display text-[26px] font-semibold text-[var(--color-line)]">{s.n}</span>
+                <div className="relative -mx-2 -mt-2 rounded-[1.4rem] p-2" style={{ background: `var(--color-${s.a}-soft)` }}>
+                  <img src={s.img} alt="" className="mx-auto h-48 w-full object-contain" draggable={false} />
+                  <span className="absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white font-display text-[18px] font-semibold shadow-[var(--shadow-card)]">{s.n}</span>
                 </div>
                 <p className="mt-4 text-[18px] font-bold">{t(s.t)}</p>
                 <p className="mt-2 text-[14px] font-semibold leading-relaxed text-[var(--color-ink-soft)]">{t(s.d)}</p>
@@ -269,8 +231,8 @@ function HowItWorks() {
 
 function AiEngine() {
   const { t } = useT()
-  const A = { name: 'Ahmed', e: '⚽', traits: ['Strong reading', 'Building focus', 'Loves football'], rec: 'Goal-Line Focus Sprints: short “match halves” of focused play.', an: 'fox' as const }
-  const B = { name: 'Sara', e: '🦊', traits: ['Growing reader', 'Strong attention', 'Loves animals'], rec: 'Animal Detective Reading Game: reading practice built around animals.', an: 'owl' as const }
+  const A = { name: 'Ahmed', e: '⚽', traits: ['Strong reading', 'Building focus', 'Loves football'], rec: 'Goal-Line Focus Sprints: short “match halves” of focused play.', img: '/illustrations/ill-football.svg' }
+  const B = { name: 'Sara', e: '🦊', traits: ['Growing reader', 'Strong attention', 'Loves animals'], rec: 'Animal Detective Reading Game: reading practice built around animals.', img: '/illustrations/ill-reading.svg' }
   return (
     <Section className="py-16">
       <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -294,10 +256,7 @@ function AiEngine() {
           {[A, B].map((c, i) => (
             <Rise key={c.name} delay={i * 0.12}>
               <motion.div whileHover={{ y: -8 }} className="h-full rounded-[1.75rem] bg-white p-6 shadow-[var(--shadow-card)]">
-                <div className="flex items-center gap-2">
-                  <CartoonAnimal kind={c.an} size={44} />
-                  <span className="text-3xl">{c.e}</span>
-                </div>
+                <img src={c.img} alt="" className="-mt-2 h-44 w-full object-contain" draggable={false} />
                 <p className="mt-3 font-display text-[18px] font-semibold">{t(c.name)}</p>
                 <ul className="mt-2 flex flex-col gap-1">
                   {c.traits.map((tr) => (
@@ -368,6 +327,9 @@ function TrustGuardrail() {
               {t('NurtureAI is a playful learning and development companion, not a psychology app. It surfaces patterns worth attention and, only after a sustained pattern, gently suggests a qualified professional. Any assessment or diagnosis is always the professional’s.')}
             </p>
           </Rise>
+          <Rise delay={0.15}>
+            <img src="/illustrations/ill-report.svg" alt="" className="mt-6 h-48 w-auto" draggable={false} />
+          </Rise>
         </div>
         <div className="grid gap-3">
           {[
@@ -404,8 +366,8 @@ function FinalCta() {
         <Confetti run={burst} />
         <div className="relative">
           <div className="mb-4 flex justify-center">
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}>
-              <Mascot size={96} expr="cheer" />
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}>
+              <img src="/illustrations/ill-family.svg" alt="" className="h-44 w-auto md:h-56" draggable={false} />
             </motion.div>
           </div>
           <Reveal as="h2" text={t('See the whole child, not just the report card.')} type="word" bounce className="mx-auto max-w-2xl justify-center text-center text-[30px] leading-tight text-white md:text-[44px]" />

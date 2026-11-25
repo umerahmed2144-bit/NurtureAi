@@ -19,6 +19,10 @@ export const DICT_LANDING: Record<string, [string, string]> = {
   'Hi Sara’s parent,': ['سارہ کے والدین، خوش آمدید', 'Sara ke walidain, khush aamdeed'],
   '⚡ 76% profile': ['⚡ پروفائل 76%', '⚡ 76% profile'],
   'Your child’s learning journey': ['آپ کے بچے کا سیکھنے کا سفر', 'Aap ke bache ka seekhne ka safar'],
+  'A mother and father with their daughter and son, looking at NurtureAI on the phone together': [
+    'ایک ماں اور باپ اپنی بیٹی اور بیٹے کے ساتھ مل کر فون پر NurtureAI دیکھ رہے ہیں',
+    'Aik maa aur baap apni beti aur bete ke saath mil kar phone par NurtureAI dekh rahe hain',
+  ],
   'Search activities…': ['سرگرمیاں تلاش کریں…', 'Activities talash karein…'],
 
   // problem
