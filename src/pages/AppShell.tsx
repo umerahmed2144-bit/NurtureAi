@@ -26,7 +26,7 @@ export function AppShell() {
       }}
     >
       {/* toolbar */}
-      <header className="flex items-center justify-between px-5 py-4 sm:px-8">
+      <header className="flex h-[72px] items-center justify-between px-4 sm:h-auto sm:px-8 sm:py-4">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
             <Mascot size={34} expr="happy" />
@@ -90,7 +90,7 @@ export function AppShell() {
       </header>
 
       {/* stage */}
-      <div className="flex flex-col items-center gap-10 px-5 pb-14 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
+      <div className="flex flex-col items-center gap-10 px-0 pb-0 sm:px-5 sm:pb-14 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
         <AnimatePresence>
           {story && (
             <motion.div
@@ -104,7 +104,7 @@ export function AppShell() {
           )}
         </AnimatePresence>
 
-        <div className="order-1 lg:order-2">
+        <div className="order-1 w-full sm:w-auto lg:order-2">
           <PhoneFrame dir={rtl ? 'rtl' : 'ltr'}>
             <StatusBar />
             <div className="no-scrollbar flex-1 overflow-y-auto">
