@@ -96,7 +96,18 @@ h5 {
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.05;
-  margin: 0;
+}
+
+/* Margin reset lives in the base layer so Tailwind margin utilities
+   (mx-auto, mt-2 ...) on headings still apply. Unlayered, it beat them. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0;
+  }
 }
 
 /* Utility layer helpers */
