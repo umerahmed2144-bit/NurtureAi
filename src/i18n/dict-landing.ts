@@ -25,6 +25,15 @@ export const DICT_LANDING: Record<string, [string, string]> = {
   ],
   'Search activities…': ['سرگرمیاں تلاش کریں…', 'Activities talash karein…'],
 
+  'A story every parent knows': ['ہر والدین کی جانی پہچانی کہانی', 'Har walidain ki jaani pehchani kahani'],
+  'Is it just a phase… or a sign?': ['کیا یہ صرف ایک دور ہے… یا کوئی اشارہ؟', 'Kya ye sirf aik daur hai… ya koi ishara?'],
+  Worried: ['پریشانی', 'Pareshani'],
+  '1-minute check-in': ['ایک منٹ کا چیک اِن', '1 minute ka check-in'],
+  'Watch them grow': ['انہیں بڑھتا دیکھیں', 'Unhein barhta dekhein'],
+  'NurtureAI turns a worried guess into a clear picture, in one minute a day.': [
+    'NurtureAI روزانہ صرف ایک منٹ میں فکر بھرے اندازے کو ایک واضح تصویر میں بدل دیتا ہے۔',
+    'NurtureAI rozana sirf aik minute mein fikar bhare andaze ko aik wazeh tasveer mein badal deta hai.',
+  ],
   // problem
   'The problem': ['مسئلہ', 'Masla'],
   'Parents can see the grades, but not how their child is learning.': [

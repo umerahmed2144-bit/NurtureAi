@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { Fragment, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Button } from '../components/ui'
@@ -37,6 +37,7 @@ export function Landing() {
       <Nav />
       <StickyStack className="bg-[var(--color-canvas)]">
         <Hero heroIn={heroIn} />
+        <Story />
         <Problem />
         <HowItWorks />
       </StickyStack>
@@ -154,6 +155,44 @@ function Hero({ heroIn }: { heroIn: boolean }) {
             </motion.div>
           </div>
           <FloatEmoji e="📚" x="94%" y="70%" d={5.5} size="1.8rem" />
+        </Rise>
+      </Section>
+    </section>
+  )
+}
+
+// The hook: a wordless three-frame story every parent recognises, before any numbers.
+function Story() {
+  const { t } = useT()
+  const frames = [
+    { img: '/illustrations/ill-worry.svg', cap: 'Worried', color: '#6b7488', bg: '#e6e9f2' },
+    { img: '/illustrations/ill-checkin.svg', cap: '1-minute check-in', color: '#1f9e5c', bg: 'var(--color-grass-soft)' },
+    { img: '/illustrations/ill-reading.svg', cap: 'Watch them grow', color: '#e07a1f', bg: 'var(--color-mango-soft)' },
+  ]
+  return (
+    <section className="relative flex min-h-screen items-center bg-white">
+      <Section className="py-16 text-center">
+        <Reveal as="p" text={t('A story every parent knows')} type="letter" className="justify-center text-sm font-extrabold uppercase tracking-wide text-[var(--color-coral)]" />
+        <Reveal as="h2" text={t('Is it just a phase… or a sign?')} type="word" bounce className="mt-2 justify-center text-[34px] leading-tight md:text-[54px]" />
+        <div className="mt-10 grid items-center gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-4">
+          {frames.map((f, i) => (
+            <Fragment key={f.img}>
+              <Rise delay={i * 0.18}>
+                <div className="rounded-[1.75rem] p-3" style={{ background: f.bg }}>
+                  <img src={f.img} alt="" className="mx-auto h-56 w-full object-contain md:h-64" draggable={false} />
+                </div>
+                <p className="mt-3 font-display text-[20px] font-semibold" style={{ color: f.color }}>{t(f.cap)}</p>
+              </Rise>
+              {i < frames.length - 1 && (
+                <span aria-hidden className="mx-auto rotate-90 font-display text-[34px] font-bold text-[var(--color-brand-strong)] md:rotate-0 rtl:md:rotate-180">→</span>
+              )}
+            </Fragment>
+          ))}
+        </div>
+        <Rise delay={0.2}>
+          <p className="mx-auto mt-8 max-w-xl text-[17px] font-semibold text-[var(--color-ink-soft)]">
+            {t('NurtureAI turns a worried guess into a clear picture, in one minute a day.')}
+          </p>
         </Rise>
       </Section>
     </section>
