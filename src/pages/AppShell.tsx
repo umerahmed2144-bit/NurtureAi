@@ -6,13 +6,14 @@ import { BottomNav } from '../components/BottomNav'
 import { SaraStory } from '../demo/SaraStory'
 import { Mascot } from '../components/characters'
 import { useDemo } from '../store/useDemoStore'
-import { useLang } from '../components/lang'
+import { useLang, useT } from '../components/lang'
 import { LANGS } from '../data/strings'
 
 export function AppShell() {
   const [story, setStory] = useState(false)
   const { resetDemo } = useDemo()
   const { lang, setLang } = useLang()
+  const { t, rtl } = useT()
   const navigate = useNavigate()
 
   return (
@@ -39,7 +40,7 @@ export function AppShell() {
             }`}
             title="Back to the NurtureAI site"
           >
-            ← back to site
+            {t('← back to site')}
           </Link>
           <Link
             to="/feedback"
@@ -48,7 +49,7 @@ export function AppShell() {
             }`}
             title="Give feedback"
           >
-            📝 Feedback
+            {t('📝 Feedback')}
           </Link>
         </div>
 
@@ -75,15 +76,15 @@ export function AppShell() {
               onClick={() => setStory(true)}
               className="hidden rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-bold text-white sm:inline-flex"
             >
-              ▶ Guided story
+              {t('▶ Guided story')}
             </button>
           )}
           <button
             onClick={() => { resetDemo(); navigate('/app') }}
-            className={`rounded-full px-3 py-2 text-xs font-bold ${story ? 'bg-white/20 text-white' : 'bg-white text-[var(--color-ink-soft)] shadow-[var(--shadow-card)]'}`}
+            className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-bold ${story ? 'bg-white/20 text-white' : 'bg-white text-[var(--color-ink-soft)] shadow-[var(--shadow-card)]'}`}
             title="Reset demo data"
           >
-            ↺ Reset
+            ↺<span className="hidden sm:inline"> {t('Reset')}</span>
           </button>
         </div>
       </header>
@@ -104,7 +105,7 @@ export function AppShell() {
         </AnimatePresence>
 
         <div className="order-1 lg:order-2">
-          <PhoneFrame>
+          <PhoneFrame dir={rtl ? 'rtl' : 'ltr'}>
             <StatusBar />
             <div className="no-scrollbar flex-1 overflow-y-auto">
               <Outlet />
@@ -115,9 +116,9 @@ export function AppShell() {
 
         {!story && (
           <div className="order-3 hidden max-w-xs flex-col gap-4 lg:flex">
-            <TipCard emoji="👆" title="Explore freely" body="Tap the tiles, log a check-in, open the weekly report, every screen is live and driven by the same data." />
-            <TipCard emoji="▶" title="Or run the story" body="Hit “Guided story” for a scripted 6-step walkthrough of Sara’s journey, perfect for presenting." />
-            <TipCard emoji="🔒" title="Fully offline" body="No internet, no login, no real child data. Everything runs on this laptop." />
+            <TipCard emoji="👆" title={t('Explore freely')} body={t('Tap the tiles, log a check-in, open the weekly report, every screen is live and driven by the same data.')} />
+            <TipCard emoji="▶" title={t('Or run the story')} body={t('Hit “Guided story” for a scripted 6-step walkthrough of Sara’s journey, perfect for presenting.')} />
+            <TipCard emoji="🔒" title={t('Fully offline')} body={t('No internet, no login, no real child data. Everything runs on this laptop.')} />
           </div>
         )}
       </div>
@@ -127,7 +128,7 @@ export function AppShell() {
 
 function TipCard({ emoji, title, body }: { emoji: string; title: string; body: string }) {
   return (
-    <div className="rounded-[1.5rem] bg-white/70 p-4 shadow-[var(--shadow-card)] backdrop-blur">
+    <div dir="auto" className="rounded-[1.5rem] bg-white/70 p-4 shadow-[var(--shadow-card)] backdrop-blur">
       <p className="flex items-center gap-2 text-[15px] font-bold">
         <span className="text-xl">{emoji}</span>
         {title}

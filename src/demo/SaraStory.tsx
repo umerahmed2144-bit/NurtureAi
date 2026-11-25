@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useDemo } from '../store/useDemoStore'
 import { Mascot } from '../components/characters'
 import { STORY_CHILD_ID } from '../data/children'
+import { useT } from '../components/lang'
 
 interface Step {
   title: string
@@ -55,6 +56,7 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
   const navigate = useNavigate()
   const { setActiveChild } = useDemo()
   const [step, setStep] = useState(0)
+  const { t, rtl } = useT()
 
   useEffect(() => {
     setActiveChild(STORY_CHILD_ID)
@@ -72,10 +74,10 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
       <div className="mb-3 flex items-center justify-between">
         <span className="flex items-center gap-2 font-display text-sm font-semibold text-white/90">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20"><Mascot size={24} expr="wave" /></span>
-          Guided story
+          {t('Guided story')}
         </span>
         <button onClick={onExit} className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white hover:bg-white/25">
-          Exit ✕
+          {t('Exit ✕')}
         </button>
       </div>
 
@@ -86,13 +88,14 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.28 }}
+          dir={rtl ? 'rtl' : 'ltr'}
           className="rounded-[1.75rem] bg-white p-6 shadow-[var(--shadow-pop)]"
         >
           <span className="inline-block rounded-full bg-[var(--color-brand-soft)] px-3 py-1 text-xs font-extrabold text-[var(--color-brand-strong)]">
-            {s.tag}
+            {t(s.tag)}
           </span>
-          <h3 className="mt-3 text-[22px] leading-tight">{s.title}</h3>
-          <p className="mt-2 text-[14px] font-semibold leading-relaxed text-[var(--color-ink-soft)]">{s.body}</p>
+          <h3 className="mt-3 text-[22px] leading-tight">{t(s.title)}</h3>
+          <p className="mt-2 text-[14px] font-semibold leading-relaxed text-[var(--color-ink-soft)]">{t(s.body)}</p>
 
           <div className="mt-5 flex items-center gap-1.5">
             {STEPS.map((_, i) => (
@@ -113,20 +116,20 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
               disabled={step === 0}
               className="rounded-full px-4 py-2.5 text-sm font-bold text-[var(--color-ink-soft)] disabled:opacity-30"
             >
-              ‹ Back
+              {t('‹ Back')}
             </button>
             <button
               onClick={() => (last ? onExit() : setStep(step + 1))}
               className="flex-1 rounded-full bg-[var(--color-ink)] py-3 font-display text-[15px] font-medium text-white"
             >
-              {last ? 'Finish story' : 'Next step ›'}
+              {last ? t('Finish story') : t('Next step ›')}
             </button>
           </div>
         </motion.div>
       </AnimatePresence>
 
       <p className="mt-3 text-center text-xs font-semibold text-white/70">
-        Step {step + 1} of {STEPS.length} · the phone on the right follows along
+        {t('Step {n} of {total} · the phone on the right follows along', { n: step + 1, total: STEPS.length })}
       </p>
     </div>
   )

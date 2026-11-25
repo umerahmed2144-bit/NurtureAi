@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import type { ReactNode } from 'react'
+import { useT } from './lang'
 
 export function ScreenHeader({
   title,
@@ -11,6 +12,7 @@ export function ScreenHeader({
   right?: ReactNode
 }) {
   const navigate = useNavigate()
+  const { rtl } = useT()
   return (
     <div className="flex items-center gap-3 px-5 pb-2 pt-2">
       <button
@@ -18,7 +20,7 @@ export function ScreenHeader({
         className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface)] text-lg shadow-[var(--shadow-card)]"
         aria-label="Back"
       >
-        ‹
+        {rtl ? '›' : '‹'}
       </button>
       <div className="flex-1">
         <h2 className="text-[20px] leading-tight">{title}</h2>

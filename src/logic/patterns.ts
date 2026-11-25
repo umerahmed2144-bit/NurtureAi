@@ -8,6 +8,8 @@ import type {
   TrendKey,
 } from '../data/types'
 import { DOMAIN_META } from '../data/domains'
+import type { Lang } from '../data/strings'
+import { tr } from '../i18n'
 
 const clamp = (n: number, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, n))
 
@@ -155,6 +157,7 @@ export interface ReferralSignal {
 export function referralSignal(
   areas: DevelopmentArea[],
   observations: Observation[],
+  lang: Lang = 'en',
 ): ReferralSignal {
   const weeksObserved = weeksSpanned(observations)
   const concern = areas.find((a) => a.status === 'attention' || (a.status === 'monitor' && a.trend !== 'up'))
@@ -163,12 +166,17 @@ export function referralSignal(
     return { triggered: false, weeksObserved }
   }
 
-  const label = DOMAIN_META[concern.key].label.toLowerCase()
+  const base = DOMAIN_META[concern.key].label
+  const label = lang === 'en' ? base.toLowerCase() : tr(lang, base)
   return {
     triggered: true,
     domain: concern.key,
     weeksObserved,
-    message: `Over the last ${weeksObserved} weeks, ${label} has stayed an area to watch. It may benefit from a professional assessment. This is a suggestion to explore support, not a diagnosis.`,
+    message: tr(
+      lang,
+      'Over the last {n} weeks, {area} has stayed an area to watch. It may benefit from a professional assessment. This is a suggestion to explore support, not a diagnosis.',
+      { n: weeksObserved, area: label },
+    ),
   }
 }
 

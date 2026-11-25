@@ -8,6 +8,7 @@ import { Card } from '../../components/ui'
 import { Mascot } from '../../components/characters'
 import { Confetti } from '../../components/motion'
 import { OBSERVATION_FIELDS } from '../../data/domains'
+import { useT } from '../../components/lang'
 import type { FocusLevel, Homework, Mood, Observation, SleepLevel } from '../../data/types'
 
 function Chips<T extends string>({
@@ -19,6 +20,7 @@ function Chips<T extends string>({
   value: T
   onChange: (v: T) => void
 }) {
+  const { t } = useT()
   return (
     <div className="grid grid-cols-3 gap-2">
       {options.map((o) => {
@@ -35,7 +37,7 @@ function Chips<T extends string>({
           >
             <span className="text-2xl">{o.emoji}</span>
             <span className="text-[11px] font-bold" style={{ color: active ? 'var(--color-brand-strong)' : 'var(--color-muted)' }}>
-              {o.label}
+              {t(o.label)}
             </span>
           </button>
         )
@@ -45,12 +47,13 @@ function Chips<T extends string>({
 }
 
 function Stepper({ label, unit, value, step, onChange }: { label: string; unit: string; value: number; step: number; onChange: (v: number) => void }) {
+  const { t } = useT()
   return (
     <div className="flex items-center justify-between rounded-2xl bg-[var(--color-canvas)] px-4 py-3">
-      <span className="text-[14px] font-bold">{label}</span>
+      <span className="text-[14px] font-bold">{t(label)}</span>
       <div className="flex items-center gap-3">
         <button onClick={() => onChange(Math.max(0, +(value - step).toFixed(1)))} className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg font-bold shadow-[var(--shadow-card)]">−</button>
-        <span className="w-16 text-center font-display text-[16px] font-semibold">{value}{unit}</span>
+        <span className="w-16 text-center font-display text-[16px] font-semibold">{value}{t(unit)}</span>
         <button onClick={() => onChange(+(value + step).toFixed(1))} className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-brand)] text-lg font-bold text-white">+</button>
       </div>
     </div>
@@ -67,8 +70,9 @@ export function LogObservation() {
   const [mood, setMood] = useState<Mood>('positive')
   const [homework, setHomework] = useState<Homework>('needed_help')
   const [saved, setSaved] = useState(false)
+  const { t } = useT()
 
-  if (!activeChild) return <EmptyState title="No child selected" body="Choose or create a child profile to see this." />
+  if (!activeChild) return <EmptyState title={t('No child selected')} body={t('Choose or create a child profile to see this.')} />
 
   const save = () => {
     const obs: Observation = {
@@ -94,9 +98,9 @@ export function LogObservation() {
         <motion.div initial={{ scale: 0, rotate: -12 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 220, damping: 12 }}>
           <Mascot expr="cheer" size={104} />
         </motion.div>
-        <h2 className="text-[22px]">Logged!</h2>
+        <h2 className="text-[22px]">{t('Logged!')}</h2>
         <p className="text-sm font-semibold text-[var(--color-muted)]">
-          Added to {activeChild.name}’s profile. NurtureAI is updating the pattern…
+          {t('Added to {name}’s profile. NurtureAI is updating the pattern…', { name: t(activeChild.name) })}
         </p>
       </div>
     )
@@ -104,7 +108,7 @@ export function LogObservation() {
 
   return (
     <div className="flex flex-col gap-4 pb-6">
-      <ScreenHeader title="Quick check-in" subtitle="Takes under a minute" />
+      <ScreenHeader title={t('Quick check-in')} subtitle={t('Takes under a minute')} />
 
       <div className="flex flex-col gap-3 px-5">
         <Card className="flex flex-col gap-3 p-4">
@@ -113,24 +117,24 @@ export function LogObservation() {
         </Card>
 
         <Card className="p-4">
-          <p className="mb-2 text-[13px] font-bold">🎯 Focus</p>
+          <p className="mb-2 text-[13px] font-bold">{t('🎯 Focus')}</p>
           <Chips options={OBSERVATION_FIELDS.focus} value={focus} onChange={setFocus} />
         </Card>
         <Card className="p-4">
-          <p className="mb-2 text-[13px] font-bold">💤 Sleep</p>
+          <p className="mb-2 text-[13px] font-bold">{t('💤 Sleep')}</p>
           <Chips options={OBSERVATION_FIELDS.sleep} value={sleep} onChange={setSleep} />
         </Card>
         <Card className="p-4">
-          <p className="mb-2 text-[13px] font-bold">😊 Mood</p>
+          <p className="mb-2 text-[13px] font-bold">{t('😊 Mood')}</p>
           <Chips options={OBSERVATION_FIELDS.mood} value={mood} onChange={setMood} />
         </Card>
         <Card className="p-4">
-          <p className="mb-2 text-[13px] font-bold">✏️ Homework</p>
+          <p className="mb-2 text-[13px] font-bold">{t('✏️ Homework')}</p>
           <Chips options={OBSERVATION_FIELDS.homework} value={homework} onChange={setHomework} />
         </Card>
 
         <button onClick={save} className="mt-1 w-full rounded-full bg-[var(--color-ink)] py-4 font-display text-[15px] font-medium text-white shadow-[var(--shadow-soft)]">
-          Save check-in
+          {t('Save check-in')}
         </button>
       </div>
     </div>

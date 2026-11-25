@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 export function StatusBar({ dark = false }: { dark?: boolean }) {
   const c = dark ? 'text-white' : 'text-[var(--color-ink)]'
   return (
-    <div className={`flex items-center justify-between px-6 pt-3 pb-1 text-[13px] font-bold ${c}`}>
+    <div dir="ltr" className={`flex items-center justify-between px-6 pt-3 pb-1 text-[13px] font-bold ${c}`}>
       <span>9:41</span>
       <div className="flex items-center gap-1.5">
         <span className="text-[11px]">●●●●</span>
@@ -15,7 +15,7 @@ export function StatusBar({ dark = false }: { dark?: boolean }) {
 }
 
 // A laptop-friendly phone mockup. Content scrolls inside the device.
-export function PhoneFrame({ children }: { children: ReactNode }) {
+export function PhoneFrame({ children, dir = 'ltr' }: { children: ReactNode; dir?: 'ltr' | 'rtl' }) {
   return (
     <div className="relative mx-auto" style={{ width: 400 }}>
       <div
@@ -24,7 +24,7 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
       >
         {/* notch */}
         <div className="pointer-events-none absolute left-1/2 top-0 z-30 h-7 w-36 -translate-x-1/2 rounded-b-3xl bg-[#101322]" />
-        <div className="relative flex h-full flex-col">{children}</div>
+        <div dir={dir} className="relative flex h-full flex-col">{children}</div>
       </div>
     </div>
   )

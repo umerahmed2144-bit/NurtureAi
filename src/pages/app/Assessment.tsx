@@ -6,14 +6,16 @@ import { ScreenHeader } from '../../components/ScreenHeader'
 import { EmptyState } from '../../components/EmptyState'
 import { ANSWER_OPTIONS, ASSESSMENT_QUESTIONS, DOMAIN_META } from '../../data/domains'
 import { accentVars } from '../../components/ui'
+import { useT } from '../../components/lang'
 
 export function Assessment() {
   const navigate = useNavigate()
   const { activeChild, saveAssessment } = useDemo()
   const [step, setStep] = useState(0)
   const [values, setValues] = useState<Record<string, 0 | 1 | 2 | 3>>({})
+  const { t } = useT()
 
-  if (!activeChild) return <EmptyState title="No child selected" body="Choose or create a child profile to see this." />
+  if (!activeChild) return <EmptyState title={t('No child selected')} body={t('Choose or create a child profile to see this.')} />
   const q = ASSESSMENT_QUESTIONS[step]
   const meta = DOMAIN_META[q.domain]
   const { color, soft } = accentVars(meta.accent)
@@ -32,7 +34,7 @@ export function Assessment() {
 
   return (
     <div className="flex flex-col gap-5 pb-6">
-      <ScreenHeader title="Quick assessment" subtitle={`Question ${step + 1} of ${ASSESSMENT_QUESTIONS.length}`} />
+      <ScreenHeader title={t('Quick assessment')} subtitle={t('Question {n} of {total}', { n: step + 1, total: ASSESSMENT_QUESTIONS.length })} />
 
       <div className="px-5">
         <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--color-line)]">
@@ -54,9 +56,9 @@ export function Assessment() {
               {meta.emoji}
             </div>
             <span className="rounded-full px-3 py-1 text-xs font-extrabold" style={{ background: soft, color }}>
-              {meta.label}
+              {t(meta.label)}
             </span>
-            <h2 className="px-2 text-[22px] leading-tight">{q.text}</h2>
+            <h2 className="px-2 text-[22px] leading-tight">{t(q.text)}</h2>
           </div>
 
           <div className="flex flex-col gap-2.5">
@@ -66,10 +68,10 @@ export function Assessment() {
                 <button
                   key={o.value}
                   onClick={() => answer(o.value)}
-                  className="flex items-center justify-between rounded-2xl border-2 bg-[var(--color-surface)] px-5 py-4 text-left transition-all active:scale-[0.98]"
+                  className="flex items-center justify-between rounded-2xl border-2 bg-[var(--color-surface)] px-5 py-4 text-start transition-all active:scale-[0.98]"
                   style={{ borderColor: active ? color : 'var(--color-line)' }}
                 >
-                  <span className="text-[15px] font-bold">{o.label}</span>
+                  <span className="text-[15px] font-bold">{t(o.label)}</span>
                   <span className="flex h-6 w-6 items-center justify-center rounded-full border-2" style={{ borderColor: color, background: active ? color : 'transparent' }}>
                     {active && <span className="text-xs text-white">✓</span>}
                   </span>
@@ -79,7 +81,7 @@ export function Assessment() {
           </div>
 
           <p className="text-center text-xs font-semibold text-[var(--color-muted)]">
-            These questions are co-designed with child-development professionals.
+            {t('These questions are co-designed with child-development professionals.')}
           </p>
         </motion.div>
       </AnimatePresence>

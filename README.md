@@ -33,7 +33,7 @@ referral directory.
 - **No backend, no internet, no login.** Seeded TypeScript data + `localStorage`.
 - The "AI" is a **deterministic, rule-based engine** (`src/logic/`) that matches
   activities to each child's interests and needs — reliable for a live demo.
-- Multilingual snippets (EN / Urdu / Roman Urdu) demonstrate the localization angle.
+- Full EN / Urdu / Roman Urdu switch (top bar): every screen of the demo, including the guided story, activities and the generated weekly report, changes language. Urdu renders right to left. Translations live in `src/i18n/dict.ts` (English text is the key; a missing entry falls back to English and logs a warning in dev). The choice is remembered in `localStorage`.
 
 ## Stack
 

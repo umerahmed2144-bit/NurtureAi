@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import type { StatusKey, TrendKey } from '../data/types'
 import { STATUS_META } from '../data/domains'
+import { useT } from './lang'
 
 export function accentVars(accent: string): { color: string; soft: string } {
   return { color: `var(--color-${accent})`, soft: `var(--color-${accent}-soft)` }
@@ -65,13 +66,14 @@ export function Tag({ children, accent = 'brand' }: { children: ReactNode; accen
 
 export function StatusBadge({ status }: { status: StatusKey }) {
   const m = STATUS_META[status]
+  const { t } = useT()
   return (
     <span
       className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-extrabold"
       style={{ background: m.soft, color: m.color }}
     >
       <span className="h-1.5 w-1.5 rounded-full" style={{ background: m.color }} />
-      {m.label}
+      {t(m.label)}
     </span>
   )
 }

@@ -104,6 +104,8 @@ Click **Exit** on the story panel.
 
 **Tap the language switcher (EN / UR / RU) in the top bar:**
 
+*(Tip: switch to UR on the Home or Report screen. The whole app flips to Urdu, right to left, including the AI-written report text. Switch back to EN before handing the demo to the next judge.)*
+
 > "And because this is built for Pakistani families specifically, the interface supports English,
 > Urdu, and Roman Urdu — not just translated content, but content adapted to how families actually
 > communicate at home."

@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useT } from './lang'
 
 const items = [
   { to: '/app', end: true, icon: '🏠', label: 'Home' },
@@ -33,6 +34,7 @@ export function BottomNav() {
 }
 
 function Tab({ to, end, icon, label }: { to: string; end?: boolean; icon: string; label: string }) {
+  const { t } = useT()
   return (
     <NavLink
       to={to}
@@ -44,7 +46,7 @@ function Tab({ to, end, icon, label }: { to: string; end?: boolean; icon: string
           <span className={`text-xl transition-transform ${isActive ? 'scale-110' : 'opacity-50 grayscale'}`}>
             {icon}
           </span>
-          <span style={{ color: isActive ? 'var(--color-brand)' : 'var(--color-muted)' }}>{label}</span>
+          <span style={{ color: isActive ? 'var(--color-brand)' : 'var(--color-muted)' }}>{t(label)}</span>
         </>
       )}
     </NavLink>
