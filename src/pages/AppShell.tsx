@@ -30,7 +30,7 @@ export function AppShell() {
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
             <Mascot size={34} expr="happy" />
-            <span className={`font-display text-lg font-semibold ${story ? 'text-white' : 'text-[var(--color-ink)]'}`}>NurtureAI</span>
+            <span className={`hidden font-display text-lg font-semibold min-[400px]:inline ${story ? 'text-white' : 'text-[var(--color-ink)]'}`}>NurtureAI</span>
           </Link>
           {/* Back to the marketing landing (an in-app route). */}
           <Link
@@ -62,8 +62,9 @@ export function AppShell() {
                 onClick={() => setLang(l.key)}
                 className="px-3 py-1.5 text-xs font-extrabold transition-colors"
                 style={{
-                  background: lang === l.key ? 'var(--color-brand)' : 'transparent',
-                  color: lang === l.key ? '#fff' : story ? '#fff' : 'var(--color-ink-soft)',
+                  // during the story the page is brand-blue, so the active pill turns white
+                  background: lang === l.key ? (story ? '#fff' : 'var(--color-brand)') : 'transparent',
+                  color: lang === l.key ? (story ? 'var(--color-brand-strong)' : '#fff') : story ? '#fff' : 'var(--color-ink-soft)',
                 }}
               >
                 {l.short}
@@ -74,9 +75,10 @@ export function AppShell() {
           {!story && (
             <button
               onClick={() => setStory(true)}
-              className="hidden rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-bold text-white sm:inline-flex"
+              className="inline-flex whitespace-nowrap rounded-full bg-[var(--color-ink)] px-3 py-2 text-xs font-bold text-white sm:px-4"
             >
-              {t('▶ Guided story')}
+              <span className="sm:hidden">{t('▶ Story')}</span>
+              <span className="hidden sm:inline">{t('▶ Guided story')}</span>
             </button>
           )}
           <button
@@ -97,7 +99,7 @@ export function AppShell() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="order-2 lg:order-1"
+              className="order-2 max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:rounded-t-[1.75rem] max-sm:bg-[var(--color-brand)] max-sm:px-3 max-sm:pb-3 max-sm:pt-2 max-sm:shadow-[0_-12px_40px_-12px_rgba(31,45,84,0.45)] lg:order-1"
             >
               <SaraStory onExit={() => setStory(false)} />
             </motion.div>

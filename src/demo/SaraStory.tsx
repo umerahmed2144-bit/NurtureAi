@@ -70,8 +70,8 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
   const last = step === STEPS.length - 1
 
   return (
-    <div className="w-full max-w-sm">
-      <div className="mb-3 flex items-center justify-between">
+    <div className="w-full max-w-sm max-sm:max-w-none">
+      <div className="mb-3 flex items-center justify-between max-sm:mb-2">
         <span className="flex items-center gap-2 font-display text-sm font-semibold text-white/90">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20"><Mascot size={24} expr="wave" /></span>
           {t('Guided story')}
@@ -89,15 +89,15 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.28 }}
           dir={rtl ? 'rtl' : 'ltr'}
-          className="rounded-[1.75rem] bg-white p-6 shadow-[var(--shadow-pop)]"
+          className="rounded-[1.75rem] bg-white p-6 shadow-[var(--shadow-pop)] max-sm:max-h-[42dvh] max-sm:overflow-y-auto max-sm:rounded-[1.25rem] max-sm:p-4"
         >
           <span className="inline-block rounded-full bg-[var(--color-brand-soft)] px-3 py-1 text-xs font-extrabold text-[var(--color-brand-strong)]">
             {t(s.tag)}
           </span>
-          <h3 className="mt-3 text-[22px] leading-tight">{t(s.title)}</h3>
-          <p className="mt-2 text-[14px] font-semibold leading-relaxed text-[var(--color-ink-soft)]">{t(s.body)}</p>
+          <h3 className="mt-3 text-[22px] leading-tight max-sm:mt-2 max-sm:text-[18px]">{t(s.title)}</h3>
+          <p className="mt-2 text-[14px] font-semibold leading-relaxed text-[var(--color-ink-soft)] max-sm:text-[13px] max-sm:leading-snug">{t(s.body)}</p>
 
-          <div className="mt-5 flex items-center gap-1.5">
+          <div className="mt-5 flex items-center gap-1.5 max-sm:mt-3">
             {STEPS.map((_, i) => (
               <span
                 key={i}
@@ -110,7 +110,7 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
             ))}
           </div>
 
-          <div className="mt-5 flex items-center justify-between gap-3">
+          <div className="mt-5 flex items-center justify-between gap-3 max-sm:mt-3">
             <button
               onClick={() => setStep(Math.max(0, step - 1))}
               disabled={step === 0}
@@ -128,7 +128,7 @@ export function SaraStory({ onExit }: { onExit: () => void }) {
         </motion.div>
       </AnimatePresence>
 
-      <p className="mt-3 text-center text-xs font-semibold text-white/70">
+      <p className="mt-3 text-center text-xs font-semibold text-white/70 max-sm:hidden">
         {t('Step {n} of {total} · the phone on the right follows along', { n: step + 1, total: STEPS.length })}
       </p>
     </div>

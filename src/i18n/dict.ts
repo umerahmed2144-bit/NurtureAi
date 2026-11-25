@@ -6,6 +6,7 @@ export const DICT: Record<string, [string, string]> = {
   '← back to site': ['ویب سائٹ پر واپس →', '← Site par wapas'],
   '📝 Feedback': ['📝 رائے دیں', '📝 Feedback dein'],
   '▶ Guided story': ['▶ رہنمائی والی کہانی', '▶ Guided kahani'],
+  '▶ Story': ['▶ کہانی', '▶ Kahani'],
   Reset: ['دوبارہ شروع', 'Reset karein'],
   'Explore freely': ['خود دیکھیں', 'Khud explore karein'],
   'Tap the tiles, log a check-in, open the weekly report, every screen is live and driven by the same data.': [
